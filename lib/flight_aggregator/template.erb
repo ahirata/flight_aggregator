@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <style>
+      table {
+        border-collapse: collapse;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+      }
+      tr:nth-child(even) { background-color: #def }
+      tr:nth-child(odd) { background-color: #FFF }
+      td {
+        border: 1px solid black;
+        border-top: none;
+        border-bottom: none;
+        padding: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <%  for company in companies %>
+      <%
+      header, *body = company
+      name, *departure_dates = header
+      %>
+      <table>
+        <tr>
+          <td><%= name %></td>
+          <% for day in departure_dates %>
+            <td><%= day.strftime('%d %b')%></td>
+          <% end %>
+        </tr>
+        <% for row in body %>
+          <%
+              return_date, *fares = row
+          %>
+          <tr>
+            <td><%= return_date.strftime('%d %b') %></td>
+            <% for fare in fares %>
+              <td><%= fare.to_s %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+      <br />
+    <% end %>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+#!/bin/env ruby
+
+require 'pathname'
+
+if ARGV[0].nil?
+  require_relative '../conf/config.rb'
+else
+  require Dir.pwd + '/' + ARGV[0]
+end
+
+FlightAggregator::Agent.new.report
+
